@@ -8,8 +8,12 @@ const bold = document.getElementById("bold");
 const italic = document.getElementById("italic");
 const underline = document.getElementById("underline");
 
-let activeCell = null;
 position.innerText = "";
+
+let activeCell = null;
+let previousCell = null;
+let previousActiveOptionsState;
+let copiedCell = null;
 
 let activeOptionsState;
 
@@ -37,6 +41,13 @@ function onCellFocus(e) {
 
   console.log(activeOptionsState);
   manageButtonState(computedStyle);
+
+  //handles previousCell style after focus is gone
+  if (previousCell) {
+    previousCell.style.border = "1px solid #e1e1e1";
+    previousCell.style.borderRightWidth = "0px";
+    previousCell.style.borderTopWidth = "0px";
+  }
 }
 
 function highlightRowAndColoumn(e) {
@@ -61,9 +72,9 @@ function onCellBlur(e) {
 
   coloumnId.style.backgroundColor = "white";
   rowElement.style.backgroundColor = "white";
-  currentId.style.border = "1px solid #e1e1e1";
-  currentId.style.borderRightWidth = "0px";
-  currentId.style.borderTopWidth = "0px";
+
+  previousCell = e.target;
+
   formulas.innerText = "";
 }
 
@@ -121,9 +132,33 @@ function onClickUnderline(underlineButton) {
   }
 }
 
-function onClickCopy() {}
+function onClickCopy(copyButton) {
+  if (copiedCell) return;
+
+  // copiedCell = { ...activeCell };
+  copiedCell = document.createElement("div");
+  copiedCell.className = activeCell.className;
+  copiedCell.style = activeCell.style.cssText;
+  console.log(copiedCell.style.backgroundColor);
+  copiedCell.innerText = activeCell.innerText;
+
+  console.log(copiedCell);
+}
 function onClickCut() {}
-function onClickPaste() {}
+
+function onClickPaste(pasteButton) {
+  if (copiedCell) {
+    copiedCell.id = activeCell.id;
+    // copiedCell = document.createElement("div");
+    activeCell.className = copiedCell.className;
+    activeCell.style = copiedCell.style.cssText;
+    // console.log(copiedCell.style, activeCell.style);
+    activeCell.innerText = copiedCell.innerText;
+  }
+  copiedCell = null;
+
+  manageButtonState();
+}
 
 function highlightTextAlignButton(textAlignValue) {
   for (let i = 0; i < textAlignELements.length; i++) {

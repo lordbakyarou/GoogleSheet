@@ -71,6 +71,7 @@
 #menuOptionList > li {
   padding: 2px 0px;
   margin-left: 20px;
+  position: relative;
   /* font-size: 14px; */
 }
 
@@ -102,9 +103,29 @@
   cursor: pointer;
 }
 
+#menuOptionList :hover .hoverSuggetion {
+  display: block;
+}
+
+.material-icons {
+  color: #595d5d;
+}
+
+.hoverSuggetion {
+  position: absolute;
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  display: none;
+  min-width: max-content;
+  top: 38px;
+}
+
 .active-option {
   background-color: #d3e3fd;
   border-radius: 5px;
+  color: black;
 }
 
 .bold {
@@ -143,10 +164,11 @@
 }
 
 .grid {
-  overflow: auto;
+  overflow: scroll;
   position: sticky;
   left: 0;
   font-size: 13px;
+  scroll-snap-type: mandatorys;
 }
 
 .grid-header {
@@ -179,6 +201,7 @@
   background-color: white;
   flex: 1;
   border-right-width: 0px;
+  padding: 2px 0px;
 }
 
 .row {

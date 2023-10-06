@@ -265,10 +265,22 @@
                 >
                   content_copy
                 </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -10px"
+                >
+                  Copy
+                </div>
               </li>
               <li>
                 <div id="cut" class="material-icons" onclick="onClickCut(this)">
                   content_cut
+                </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -5px"
+                >
+                  Cut
                 </div>
               </li>
               <li>
@@ -278,6 +290,12 @@
                   onclick="onClickPaste(this)"
                 >
                   content_paste
+                </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -15px"
+                >
+                  Paste
                 </div>
               </li>
               <li>
@@ -316,7 +334,7 @@
               <li>
                 <div class="vertical-line" style="padding: 0"></div>
               </li>
-              <li>
+              <li style="position: relative">
                 <div
                   id="bold"
                   class="material-icons"
@@ -324,8 +342,14 @@
                 >
                   format_bold
                 </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -10px"
+                >
+                  Bold
+                </div>
               </li>
-              <li>
+              <li style="position: relative">
                 <div
                   id="italic"
                   class="material-icons"
@@ -333,8 +357,14 @@
                 >
                   format_italic
                 </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -10px"
+                >
+                  Italic
+                </div>
               </li>
-              <li>
+              <li style="position: relative">
                 <div
                   id="underline"
                   class="material-icons"
@@ -342,8 +372,14 @@
                 >
                   format_underlined
                 </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -25px"
+                >
+                  Underline
+                </div>
               </li>
-              <li>
+              <li style="position: relative">
                 <div
                   id="leftAlign"
                   class="material-icons text-align"
@@ -352,8 +388,14 @@
                 >
                   format_align_left
                 </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -30px"
+                >
+                  Align Left
+                </div>
               </li>
-              <li>
+              <li style="position: relative">
                 <div
                   id="centerAlign"
                   class="material-icons text-align"
@@ -362,8 +404,14 @@
                 >
                   format_align_center
                 </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -30px"
+                >
+                  Align Center
+                </div>
               </li>
-              <li>
+              <li style="position: relative">
                 <div
                   id="rightAlign"
                   class="material-icons text-align"
@@ -372,11 +420,17 @@
                 >
                   format_align_right
                 </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -30px"
+                >
+                  Align Right
+                </div>
               </li>
               <li>
                 <div class="vertical-line" style="padding: 0"></div>
               </li>
-              <li>
+              <li style="position: relative">
                 <div class="" id="text-color">
                   <label for="color-picker"
                     ><span class="material-icons">
@@ -392,8 +446,14 @@
                     onchange="onChangeTextColor(this)"
                   />
                 </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -30px"
+                >
+                  Text Color
+                </div>
               </li>
-              <li>
+              <li style="position: relative">
                 <div class="" id="bgcolor-picker">
                   <label for="bg-color-picker"
                     ><span class="material-icons">
@@ -407,6 +467,12 @@
                     style="width: 0; height: 0"
                     onchange="onChangeBackgroundColor(this)"
                   />
+                </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -50px"
+                >
+                  Background Color
                 </div>
               </li>
             </ul>
