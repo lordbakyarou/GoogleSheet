@@ -4,6 +4,7 @@
   margin: 0px;
   padding: 0px;
   font-family: open Sans;
+  font-weight: 500;
 }
 
 .main-option-container {
@@ -241,17 +242,34 @@
 
 .sheets {
   display: flex;
-  gap: 20px;
+}
+
+#addSheet:hover {
+  cursor: pointer;
+  background-color: #e8ebee;
+  border-radius: 50%;
 }
 
 .sheet {
+  display: flex;
   color: #444746;
   padding: 7px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.sheet:first-child {
+.arrow-button {
+  border: none;
+  background-color: transparent;
+}
+
+.sheet:hover {
+  cursor: pointer;
+  background-color: #e8ebee;
+}
+
+.sheet-active:hover {
+  background-color: #d8e5f8;
 }
 
 .sheet-active {

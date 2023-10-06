@@ -43,7 +43,18 @@ function createGrid(e) {
   sheets.push(grid);
 
   //sheet create
+  const individualSheet = document.createElement("div");
   const sheet = document.createElement("div");
+  individualSheet.appendChild(sheet);
+  individualSheet.style.display = "flex";
+  individualSheet.className = "individualSheet";
+
+  const dropDown = document.createElement("button");
+  dropDown.className = "material-icons arrow-button";
+  dropDown.onclick = "sheetOptions(this)";
+  dropDown.disabled = true;
+  dropDown.innerText = "arrow_drop_down";
+  individualSheet.appendChild(dropDown);
 
   console.log(sheet.classList);
   sheet.innerText = `Sheet${sheets.length}`;
@@ -51,7 +62,7 @@ function createGrid(e) {
 
   sheet.addEventListener("click", sheetClicked);
   // sheet.addEventListener("blur", sheetBlur);
-  sheetDiv.appendChild(sheet);
+  sheetDiv.appendChild(individualSheet);
 
   if (e == 1) {
     main.insertBefore(sheets[0], footer);
@@ -154,6 +165,7 @@ addSheets.addEventListener("click", createGrid);
 function sheetClicked(e) {
   const index = e.target.innerText.replace("Sheet", "");
   e.target.classList.add("sheet-active");
+  // console.log
   // console.log(index);
   currentActiveSheet = "Sheet" + index;
   console.log(currentActiveSheet);
