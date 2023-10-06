@@ -23,6 +23,7 @@
         height: 100vh;
         overflow: hidden;
       "
+      id="main"
     >
       <header>
         <div class="options">
@@ -307,13 +308,16 @@
                   style="background-color: #edf2fa; display: flex"
                 >
                   <select id="font-selector" style="width: 100px">
+                    <option value='"open Sans"'>Open Sans</option>
                     <option value="Arial, sans-serif">Arial</option>
                     <option value="Verdana, sans-serif">Verdana</option>
                     <option value="Georgia, serif">Georgia</option>
-                    <option value="Times New Roman, serif">
+                    <option value='"Times New Roman", serif'>
                       Times New Roman
                     </option>
-                    <option value="Courier New, monospace">Courier New</option>
+                    <option value='"Courier New", monospace'>
+                      Courier New
+                    </option>
                   </select>
                 </div>
               </li>
@@ -323,6 +327,7 @@
                   style="background-color: #edf2fa; display: flex"
                 >
                   <select id="font-size-selector" style="width: 70px">
+                    <option value="13px">13px</option>
                     <option value="12px">12px</option>
                     <option value="16px">16px</option>
                     <option value="20px">20px</option>
@@ -483,10 +488,20 @@
               class="vertical-line"
               style="background-color: #e1e3e6; padding: 0.5px"
             ></div>
-            <div id="math" style="align-items: center">
+            <div id="math" style="align-items: center; max-width: 100vw">
               <img src="fx.png" alt="" width="20px" />
               <div
-                style="width: 100vw; padding-left: 10px; outline: none"
+                style="
+                  width: 100vw;
+                  /* position: absolute; */
+                  box-sizing: border-box;
+                  padding-left: 10px;
+                  padding-right: 10px;
+                  outline: none;
+                  overflow-y: scroll;
+                  max-height: 25px;
+                  scroll-padding: 100px;
+                "
                 contenteditable="true"
                 id="formulas"
               ></div>
@@ -499,10 +514,18 @@
         <div class="grid-header"></div>
       </div> -->
 
-      <div class="grid">
+      <!-- <div class="grid">
         <div class="grid-header"></div>
+      </div> -->
+
+      <!-- footer-->
+
+      <div id="footer">
+        <div class="material-icons" id="addSheet">add</div>
+        <div class="sheets" id="sheets"></div>
       </div>
     </main>
+
     <script src="options.js"></script>
     <script src="script.js"></script>
   </body>

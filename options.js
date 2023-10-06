@@ -1,6 +1,9 @@
 const position = document.getElementById("position");
 const formulas = document.getElementById("formulas");
 const textAlignELements = document.getElementsByClassName("text-align");
+const fontSizeSelector = document.getElementById("font-size-selector");
+
+const fontFamilySelector = document.getElementById("font-selector");
 
 // console.log(menuItems);
 //menuItems
@@ -39,7 +42,7 @@ function onCellFocus(e) {
     fontSize: computedStyle.fontSize,
   };
 
-  console.log(activeOptionsState);
+  // console.log(activeOptionsState);
   manageButtonState(computedStyle);
 
   //handles previousCell style after focus is gone
@@ -61,7 +64,7 @@ function highlightRowAndColoumn(e) {
   currentId.style.border = "none";
   currentId.style.border = "1px solid #135dd2";
   position.innerText = currentId.id;
-  formulas.innerText = currentId.innerText;
+  formulas.innerText = currentId.innerText.trim();
 }
 
 function onCellBlur(e) {
@@ -74,8 +77,9 @@ function onCellBlur(e) {
   rowElement.style.backgroundColor = "white";
 
   previousCell = e.target;
+  // activeSheetObject[e.target.id].content = e.target.innerText;
 
-  formulas.innerText = "";
+  // formulas.innerText = "";
 }
 
 function onCellInput(e) {
@@ -88,6 +92,11 @@ function changeButtonState(button, selectedButton) {
   } else {
     button.classList.remove("active-option");
   }
+
+  if (button.id === "font-selector") button.value = selectedButton;
+
+  if (button.id === "font-size-selector")
+    fontSizeSelector.value = selectedButton;
 }
 
 function manageButtonState(computedStyle) {
@@ -99,6 +108,12 @@ function manageButtonState(computedStyle) {
 
   //underline
   changeButtonState(underline, activeOptionsState.isUnderLineSelected);
+
+  //fontFamily
+  changeButtonState(fontFamilySelector, activeOptionsState.fontFamily);
+
+  //fontSize
+  changeButtonState(fontSizeSelector, activeOptionsState.fontSize);
 
   //textAlign
   highlightTextAlignButton(activeOptionsState.textAlign);
@@ -133,8 +148,6 @@ function onClickUnderline(underlineButton) {
 }
 
 function onClickCopy(copyButton) {
-  if (copiedCell) return;
-
   // copiedCell = { ...activeCell };
   copiedCell = document.createElement("div");
   copiedCell.className = activeCell.className;
@@ -142,9 +155,24 @@ function onClickCopy(copyButton) {
   console.log(copiedCell.style.backgroundColor);
   copiedCell.innerText = activeCell.innerText;
 
-  console.log(copiedCell);
+  // console.log(copiedCell);
 }
-function onClickCut() {}
+function onClickCut() {
+  copiedCell = document.createElement("div");
+  copiedCell.className = activeCell.className;
+  copiedCell.style = activeCell.style.cssText;
+  console.log(copiedCell.style.backgroundColor);
+  copiedCell.innerText = activeCell.innerText;
+  console.log(activeCell.style);
+  activeCell.style = document.createElement("div").cssText;
+
+  activeCell.style.fontWeight = "400";
+  activeCell.style.fontStyle = "normal";
+  activeCell.style.textDecoration = "none";
+  activeCell.innerText = "";
+  // console.log(copiedCell);
+  // console.log(activeCell.style);
+}
 
 function onClickPaste(pasteButton) {
   if (copiedCell) {
@@ -155,10 +183,28 @@ function onClickPaste(pasteButton) {
     // console.log(copiedCell.style, activeCell.style);
     activeCell.innerText = copiedCell.innerText;
   }
-  copiedCell = null;
+  // copiedCell = null;
 
   manageButtonState();
 }
+
+formulas.addEventListener("input", () => {
+  if (activeCell) activeCell.innerText = formulas.innerText;
+});
+
+fontSizeSelector.addEventListener("change", () => {
+  if (activeCell) {
+    activeCell.style.fontSize = fontSizeSelector.value;
+    // console.log(fontSizeSelector.value, activeCell.fontSize);
+  }
+});
+
+fontFamilySelector.addEventListener("change", () => {
+  if (activeCell) {
+    activeCell.style.fontFamily = fontFamilySelector.value;
+    console.log(fontFamilySelector.value, activeCell.fontFamily);
+  }
+});
 
 function highlightTextAlignButton(textAlignValue) {
   for (let i = 0; i < textAlignELements.length; i++) {

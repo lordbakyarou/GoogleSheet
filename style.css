@@ -229,3 +229,32 @@
   /* overflow: hidden; */
   box-sizing: border-box;
 }
+
+#footer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  padding-left: 15px;
+  background-color: #f9fbfd;
+}
+
+.sheets {
+  display: flex;
+  gap: 20px;
+}
+
+.sheet {
+  color: #444746;
+  padding: 7px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sheet:first-child {
+}
+
+.sheet-active {
+  background-color: #e1e9f7;
+  color: #0b57d2;
+}
