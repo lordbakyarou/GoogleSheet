@@ -164,7 +164,7 @@ function sortDataByColumnReverse(columnIndex) {
     if (value != "") d.push(value);
   }
 
-  d.sort((a, b) => b - a);
+  d.reverse();
 
   for (let j = 1; j < 100; j++) {
     const cellId = String.fromCharCode(64 + columnIndex + 1) + j;
@@ -227,5 +227,6 @@ function sortZtoA(e) {
   const columnName = e.parentNode.parentNode.parentNode;
   const index = columnName.id.charCodeAt(0) - 65;
 
+  console.log(index);
   sortDataByColumnReverse(index);
 }
