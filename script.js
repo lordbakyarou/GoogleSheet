@@ -2,9 +2,12 @@ let currentActiveSheet = null;
 
 const main = document.getElementById("main");
 const footer = document.getElementById("footer");
+const searchInput = document.getElementById("searchInput");
 
 const sheets = [];
 let data;
+let searchData;
+let searchIndex;
 
 const body = document.body;
 
@@ -226,4 +229,54 @@ function sortZtoA(e) {
 
   console.log(index);
   sortDataByColumnReverse(index);
+}
+
+searchInput.addEventListener("click", () => {
+  searchInput.style.color = "#000";
+  searchInput.innerText = "";
+
+  searchData = [];
+  searchIndex = [];
+
+  for (let i = 0; i < data.length; i++) {
+    for (let j = 0; j < data[0].length; j++) {
+      if (data[i][j].innerText != "") {
+        searchData.push(data[i][j].innerText);
+        searchIndex.push(data[i][j].id);
+        // console.log(searchData);
+      }
+      data[i][j].style.backgroundColor = "white";
+      data[i][j].style.border = "1px solid #e1e1e1";
+      data[i][j].style.borderTopWidth = "0px";
+      data[i][j].style.borderRightWidth = "0px";
+
+      // console.log(data[i][j].innerText);
+    }
+  }
+  console.log(searchData, searchIndex);
+});
+
+searchInput.addEventListener("input", searchInCell);
+
+function searchInCell(e) {
+  for (let i = 0; i < searchData.length; i++) {
+    const cell = document.getElementById(searchIndex[i]);
+    // console.log(searchIndex);
+
+    if (
+      searchData[i].includes(searchInput.innerText) &&
+      searchInput.innerText != ""
+    ) {
+      cell.style.backgroundColor = "#73d18f";
+      cell.style.border = "2px solid #146c2e";
+      console.log(searchData[i], cell);
+    } else {
+      cell.style.backgroundColor = "white";
+      cell.style.border = "1px solid #e1e1e1";
+      cell.style.borderTopWidth = "0px";
+      cell.style.borderRightWidth = "0px";
+    }
+
+    console.log(searchInput.innerText);
+  }
 }
