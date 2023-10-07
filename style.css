@@ -197,6 +197,7 @@
 
 .column {
   min-width: 100px;
+  /* min-height: 2px; */
   border: 1px solid #c0c0c0;
   text-align: center;
   background-color: white;
@@ -207,12 +208,22 @@
 }
 
 .column .spanSort {
+  display: none;
+  font-size: 18px;
 }
 
 .column .spanText {
   border: none;
   background-color: transparent;
 }
+
+.column:hover .spanSort {
+  display: block;
+}
+
+.spanSort:hover {
+}
+
 .row {
   display: flex;
 }
