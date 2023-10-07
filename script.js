@@ -1,25 +1,10 @@
-// const initialCellState = {
-//   fontFamily_data: "monospace",
-//   fontSize_data: "14",
-//   isBold: false,
-//   isItalic: false,
-//   textAlign: "start",
-//   isUnderlined: false,
-//   color: "#000000",
-//   backgroundColor: "#ffffff",
-//   content: "",
-// };
-
-// let activeSheetIndex = -1;
-
-// let activeSheetObject = false;
-
 let currentActiveSheet = null;
 
 const main = document.getElementById("main");
 const footer = document.getElementById("footer");
 
 const sheets = [];
+let data;
 
 const body = document.body;
 
@@ -43,18 +28,8 @@ function createGrid(e) {
   sheets.push(grid);
 
   //sheet create
-  const individualSheet = document.createElement("div");
-  const sheet = document.createElement("div");
-  individualSheet.appendChild(sheet);
-  individualSheet.style.display = "flex";
-  individualSheet.className = "individualSheet";
 
-  const dropDown = document.createElement("button");
-  dropDown.className = "material-icons arrow-button";
-  dropDown.onclick = "sheetOptions(this)";
-  dropDown.disabled = true;
-  dropDown.innerText = "arrow_drop_down";
-  individualSheet.appendChild(dropDown);
+  const sheet = document.createElement("div");
 
   console.log(sheet.classList);
   sheet.innerText = `Sheet${sheets.length}`;
@@ -62,7 +37,7 @@ function createGrid(e) {
 
   sheet.addEventListener("click", sheetClicked);
   // sheet.addEventListener("blur", sheetBlur);
-  sheetDiv.appendChild(individualSheet);
+  sheetDiv.appendChild(sheet);
 
   if (e == 1) {
     main.insertBefore(sheets[0], footer);
@@ -79,15 +54,26 @@ function createInsideGrid() {
   srNo.innerText = "";
   gridHeader.appendChild(srNo);
 
-  // const data = [];
+  data = [];
   // console.log(grid);
 
   for (let i = 65; i <= 90; i++) {
     const column = document.createElement("div");
     const char = String.fromCharCode(i);
-    column.innerText = char;
+    const spanText = document.createElement("p");
+    column.style.display = "flex";
+    spanText.innerText = char;
+    spanText.className = "spanText";
+    // column.innerText = char;
     column.id = char;
     column.className = "column";
+    const span = document.createElement("span");
+    span.className = "material-icons spanSort";
+    span.innerText = "arrow_drop_down";
+
+    column.appendChild(spanText);
+    column.appendChild(span);
+
     gridHeader.appendChild(column);
   }
 
@@ -95,7 +81,7 @@ function createInsideGrid() {
     const row = document.createElement("div");
     row.className = "row";
 
-    // const rowData = [];
+    const rowData = [];
 
     for (let i = 64; i <= 90; i++) {
       const cell = document.createElement("div");
@@ -110,14 +96,15 @@ function createInsideGrid() {
         cell.addEventListener("focus", onCellFocus);
         cell.addEventListener("blur", onCellBlur);
         cell.addEventListener("input", onCellInput);
-        const randomValue = Math.floor(Math.random() * 100);
+        // const randomValue = Math.floor(Math.random() * 100);
         // cell.innerText = randomValue;
-        // rowData.push(randomValue);
+        rowData.push(cell);
+        // console.log(rowData);
       }
       row.appendChild(cell);
     }
 
-    // data.push(rowData);
+    data.push(rowData);
     grid.appendChild(row);
   }
 
@@ -128,44 +115,35 @@ function createInsideGrid() {
 
 addSheets.addEventListener("click", createGrid);
 
-// function sortDataByColumn(columnIndex) {
-//   data.sort((a, b) => a[columnIndex] - b[columnIndex]);
+const d = [];
 
-//   // Update the DOM to reflect the sorted data
-//   for (let i = 0; i < data.length; i++) {
-//     for (let j = 1; j <= 26; j++) {
-//       const cellId = String.fromCharCode(64 + j) + (i + 1);
-//       const cell = document.getElementById(cellId);
-//       cell.innerText = data[i][j - 1];
-//     }
-//   }
-// }
+function sortDataByColumn(columnIndex) {
+  console.log(data.length);
+  // console.log(data[0].length, data.length);
+  for (let i = 0; i < data.length; i++) {
+    const value = data[i][columnIndex].innerText;
+    if (value != "") d.push(value);
+    console.log("");
+    // console.log(data[i][columnIndex].innerText, data[i][columnIndex]);
+  }
 
-// sortDataByColumn(2);
+  d.sort();
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   sheets.push(main);
-//   const sheet = document.createElement("div");
-//   sheet.innerText = `Sheet${sheets.length}`;
-//   sheet.className = "sheet";
-//   sheet.addEventListener("click", sheetClicked);
-//   sheetDiv.appendChild(sheet);
-// });
+  // console.log(d);
 
-// addSheets.addEventListener("click", () => {
-//   sheets.push(main);
-// const sheet = document.createElement("div");
-// sheet.innerText = `Sheet${sheets.length}`;
-// sheet.className = "sheet";
-// sheet.addEventListener("click", sheetClicked);
-// sheetDiv.appendChild(sheet);
-//   console.log(sheets);
-// });
+  // Update the DOM to reflect the sorted data
+
+  for (let j = 1; j < 100; j++) {
+    const cellId = String.fromCharCode(64 + columnIndex + 1) + j;
+    console.log(cellId);
+    const cell = document.getElementById(cellId);
+    cell.innerText = d[j - 1] === undefined ? "" : d[j - 1];
+  }
+}
 
 function sheetClicked(e) {
   const index = e.target.innerText.replace("Sheet", "");
   e.target.classList.add("sheet-active");
-  // console.log
   // console.log(index);
   currentActiveSheet = "Sheet" + index;
   console.log(currentActiveSheet);

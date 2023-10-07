@@ -203,8 +203,16 @@
   flex: 1;
   border-right-width: 0px;
   padding: 2px 0px;
+  z-index: 2;
 }
 
+.column .spanSort {
+}
+
+.column .spanText {
+  border: none;
+  background-color: transparent;
+}
 .row {
   display: flex;
 }
