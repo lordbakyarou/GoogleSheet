@@ -81,6 +81,21 @@
   padding: 2px;
 }
 
+.search {
+  background-color: white;
+  min-width: 300px;
+  border-radius: 5px;
+}
+
+#searchInput {
+  outline: none;
+  border: none;
+}
+
+#searchInput:focus {
+  border: 1px solid red;
+}
+
 #font-selector,
 #font-size-selector {
   border: none;
@@ -104,6 +119,10 @@
   cursor: pointer;
 }
 
+#search :hover {
+  background-color: white;
+}
+
 #menuOptionList :hover .hoverSuggetion {
   display: block;
 }
@@ -114,7 +133,7 @@
 
 .hoverSuggetion {
   position: absolute;
-  background-color: black;
+  background-color: #232323;
   border-radius: 5px;
   color: white;
   font-size: 14px;
@@ -206,7 +225,10 @@
   padding: 2px 0px;
   z-index: 2;
   align-items: center;
-  /* box-sizing: content-box; */
+  display: flex;
+  justify-content: center;
+  position: relative;
+  /* box-sizing: border-box; */
 }
 
 .column .spanSort {
@@ -217,6 +239,9 @@
 .column .spanText {
   border: none;
   background-color: transparent;
+  position: static;
+  min-width: fit-content;
+  white-space: nowrap;
 }
 
 .column:hover .spanSort {
@@ -301,18 +326,35 @@
 }
 
 .column .dropdown {
-  position: relative;
+  position: absolute;
   display: none;
-}
-
-.column:hover .dropdown {
-  position: relative;
-  display: flex;
   max-width: 19px;
   justify-content: center;
   border-radius: 50%;
+  align-items: left;
+  left: 30px;
+}
+
+.column .dropbtn {
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0;
+  overflow: hidden;
+  min-width: fit-content;
+  min-height: fit-content;
+}
+
+.column:hover .dropdown {
+  position: absolute;
+  display: flex;
+  /* max-width: 20px; */
+  justify-content: center;
+  border-radius: 50%;
   align-items: center;
-  left: 15px;
+  left: 75px;
+  white-space: nowrap;
 }
 
 .dropdown:hover {
@@ -320,36 +362,40 @@
 }
 
 /* Style the dropdown button */
-.column .dropbtn {
-  /* color: white; */
-  /* padding: 10px 20px; */
-  /* width: 10px; */
-  font-size: 15px;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-
-  /* font-size: 14px; */
-}
 
 /* Style the dropdown content (hidden by default) */
 .column .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: white;
   min-width: 160px;
-  top: 23px;
-  left: 10px;
+  top: 28px;
+  left: 2px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px 0px;
+
+  outline: none;
   /* z-index: 1; */
 }
 
 /* Style the dropdown links */
 .column .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 5px 25px;
   text-decoration: none;
   display: block;
+  border: 0px;
+  font-size: 12px;
+  /* gap: 20px; */
+  /* border-radius: 10px; */
+}
+
+.column .icons {
+  position: absolute;
+  top: 5px;
+  left: -10;
+  font-size: 17px;
 }
 
 /* Change color of dropdown links on hover */
@@ -359,5 +405,8 @@
 
 /* Show the dropdown content when the dropdown button is clicked */
 .column .show {
-  display: block;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }

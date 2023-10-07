@@ -480,8 +480,49 @@
                   Background Color
                 </div>
               </li>
+              <li style="position: relative">
+                <div
+                  id="functinos"
+                  class="material-icons functions"
+                  onclick="onClickFunctions(this)"
+                >
+                  functions
+                </div>
+                <div
+                  class="hoverSuggetion"
+                  style="padding: 5px 10px; left: -30px"
+                >
+                  Functions
+                </div>
+              </li>
+              <li
+                style="
+                  position: relative;
+                  display: flex;
+                  background-color: #edf2fa;
+                "
+                id="search"
+              >
+                <div
+                  id="functions"
+                  class="material-icons functions"
+                  onclick="onClickFunctions(this)"
+                  style="background: transparent"
+                >
+                  search
+                </div>
+                <div
+                  contenteditable="true"
+                  class="search"
+                  id="searchInput"
+                  style="padding-left: 10px"
+                >
+                  Find in sheet
+                </div>
+              </li>
             </ul>
           </div>
+
           <div class="math-position">
             <div id="position">Null</div>
             <div

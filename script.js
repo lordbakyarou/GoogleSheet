@@ -65,12 +65,6 @@ function createInsideGrid() {
     spanText.innerText = char;
     spanText.className = "spanText";
 
-    //popup
-    // const popup = document.createElement("div");
-    // popup.className = "popup";
-    // popup.innerHTML = ` <ul> <li><i class=“fas fa-cut”></i>Cut</li> <li><i class=“fas fa-copy”></i>Copy</li> <li><i class=“fas fa-paste”></i>Paste</li> <li><i class=“fas fa-paste”></i>Paste special</li> <li><i class=“fas fa-arrow-left”></i>Insert 1 column left</li> <li><i class=“fas fa-arrow-right”></i>Insert 1 column right</li> </ul> `;
-
-    // column.innerText = char;
     column.id = char;
     column.className = "column";
     const span = document.createElement("span");
@@ -82,13 +76,16 @@ function createInsideGrid() {
     div.className = "dropdown";
     div.innerHTML = `<button class="dropbtn material-icons" onclick="drop(this)">arrow_drop_down</button>
     <div class="dropdown-content">
-      <a href="#" onclick="sortAtoZ(this)">Sort Sheet A to Z</a>
-      <a href="#" onclick="sortZtoA(this)">Sort Sheet Z to A</a>
+      <a href="#" onclick="sortAtoZ(this)"><span class=" dropbtn material-icons icons">
+    sort_by_alpha
+      </span>Sort Sheet A to Z</a>
+      <a href="#" onclick="sortZtoA(this)"><span class=" dropbtn material-icons icons" style="top:42px;left:9px">
+      sort_by_alpha_alt
+      </span>Sort Sheet Z to A</a>
     </div>`;
 
     column.appendChild(spanText);
     column.appendChild(div);
-    // column.appendChild(popup);
 
     gridHeader.appendChild(column);
   }
