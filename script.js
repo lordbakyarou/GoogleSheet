@@ -64,15 +64,31 @@ function createInsideGrid() {
     column.style.display = "flex";
     spanText.innerText = char;
     spanText.className = "spanText";
+
+    //popup
+    // const popup = document.createElement("div");
+    // popup.className = "popup";
+    // popup.innerHTML = ` <ul> <li><i class=“fas fa-cut”></i>Cut</li> <li><i class=“fas fa-copy”></i>Copy</li> <li><i class=“fas fa-paste”></i>Paste</li> <li><i class=“fas fa-paste”></i>Paste special</li> <li><i class=“fas fa-arrow-left”></i>Insert 1 column left</li> <li><i class=“fas fa-arrow-right”></i>Insert 1 column right</li> </ul> `;
+
     // column.innerText = char;
     column.id = char;
     column.className = "column";
     const span = document.createElement("span");
+    span.addEventListener("click", sortingFunction);
     span.className = "material-icons spanSort";
     span.innerText = "arrow_drop_down";
 
+    const div = document.createElement("div");
+    div.className = "dropdown";
+    div.innerHTML = `<button class="dropbtn material-icons" onclick="drop(this)">arrow_drop_down</button>
+    <div class="dropdown-content">
+      <a href="#" onclick="sortAtoZ(this)">Sort Sheet A to Z</a>
+      <a href="#" onclick="sortZtoA(this)">Sort Sheet Z to A</a>
+    </div>`;
+
     column.appendChild(spanText);
-    column.appendChild(span);
+    column.appendChild(div);
+    // column.appendChild(popup);
 
     gridHeader.appendChild(column);
   }
@@ -115,15 +131,14 @@ function createInsideGrid() {
 
 addSheets.addEventListener("click", createGrid);
 
-const d = [];
-
 function sortDataByColumn(columnIndex) {
-  console.log(data.length);
+  const d = [];
+  // console.log(data.length);
   // console.log(data[0].length, data.length);
   for (let i = 0; i < data.length; i++) {
     const value = data[i][columnIndex].innerText;
     if (value != "") d.push(value);
-    console.log("");
+    // console.log("");
     // console.log(data[i][columnIndex].innerText, data[i][columnIndex]);
   }
 
@@ -135,7 +150,24 @@ function sortDataByColumn(columnIndex) {
 
   for (let j = 1; j < 100; j++) {
     const cellId = String.fromCharCode(64 + columnIndex + 1) + j;
-    console.log(cellId);
+    // console.log(cellId);
+    const cell = document.getElementById(cellId);
+    cell.innerText = d[j - 1] === undefined ? "" : d[j - 1];
+  }
+}
+
+function sortDataByColumnReverse(columnIndex) {
+  const d = [];
+
+  for (let i = 0; i < data.length; i++) {
+    const value = data[i][columnIndex].innerText;
+    if (value != "") d.push(value);
+  }
+
+  d.sort((a, b) => b - a);
+
+  for (let j = 1; j < 100; j++) {
+    const cellId = String.fromCharCode(64 + columnIndex + 1) + j;
     const cell = document.getElementById(cellId);
     cell.innerText = d[j - 1] === undefined ? "" : d[j - 1];
   }
@@ -144,10 +176,8 @@ function sortDataByColumn(columnIndex) {
 function sheetClicked(e) {
   const index = e.target.innerText.replace("Sheet", "");
   e.target.classList.add("sheet-active");
-  // console.log(index);
   currentActiveSheet = "Sheet" + index;
   console.log(currentActiveSheet);
-  // console.log(document.body.remove());
 
   sheets[index - 1].style.display = "block";
 
@@ -160,7 +190,6 @@ function sheetClicked(e) {
     main.insertBefore(sheets[index - 1], footer);
   }
   console.log(sheets[index - 1]);
-  // body.appendChild(sheets[index]);
   manageSheetState(currentActiveSheet);
 }
 
@@ -173,4 +202,30 @@ function manageSheetState(index) {
       sheetList[i].classList.remove("sheet-active");
     }
   }
+}
+
+let dropdownContent;
+
+function sortingFunction(e) {
+  console.log(popup);
+  e.target.appendChild(popup);
+}
+
+function drop(e) {
+  e.nextElementSibling.classList.toggle("show");
+  dropdownContent = e.nextElementSibling;
+}
+
+function sortAtoZ(e) {
+  const columnName = e.parentNode.parentNode.parentNode;
+  const index = columnName.id.charCodeAt(0) - 65;
+
+  sortDataByColumn(index);
+}
+
+function sortZtoA(e) {
+  const columnName = e.parentNode.parentNode.parentNode;
+  const index = columnName.id.charCodeAt(0) - 65;
+
+  sortDataByColumnReverse(index);
 }
