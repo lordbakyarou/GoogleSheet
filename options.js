@@ -11,6 +11,10 @@ const bold = document.getElementById("bold");
 const italic = document.getElementById("italic");
 const underline = document.getElementById("underline");
 
+const activeOp = {
+  sheet: {},
+};
+
 position.innerText = "";
 
 let activeCell = null;
@@ -40,7 +44,12 @@ function onCellFocus(e) {
     textColor: computedStyle.color,
     backgroundColor: computedStyle.backgroundColor,
     fontSize: computedStyle.fontSize,
+    sheetName: currentActiveSheet,
+    cellId: activeCell.id,
+    textContent: activeCell.innerText,
   };
+
+  activeOp[activeCell.id] = activeOptionsState;
 
   // console.log(activeOptionsState);
   manageButtonState(computedStyle);

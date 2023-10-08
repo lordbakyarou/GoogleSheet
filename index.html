@@ -230,7 +230,11 @@
                   <div class="material-icons" style="font-size: 19px">
                     move_to_inbox
                   </div>
-                  <div class="material-icons" style="font-size: 19px">
+                  <div
+                    class="material-icons"
+                    style="font-size: 19px"
+                    onclick="exportFile(this)"
+                  >
                     cloud_upload
                   </div>
                 </div>
@@ -480,19 +484,38 @@
                   Background Color
                 </div>
               </li>
-              <li style="position: relative">
+              <li>
+                <div class="vertical-line" style="padding: 0"></div>
+              </li>
+              <li
+                style="
+                  position: relative;
+                  max-width: 20px;
+                  min-width: 20px;
+                  background-color: transparent;
+                  border: none;
+                "
+                class="column"
+              >
                 <div
-                  id="functinos"
+                  id="functions"
                   class="material-icons functions"
                   onclick="onClickFunctions(this)"
+                  ondblclick="onBlurFunctions(this)"
                 >
                   functions
                 </div>
+
                 <div
-                  class="hoverSuggetion"
-                  style="padding: 5px 10px; left: -30px"
+                  class="dropdown-content function-dropdown"
+                  style="align-items: start; background-color: white"
+                  id="function-dropdown"
                 >
-                  Functions
+                  <a href="#" onclick="functionSum(this)">SUM</a>
+                  <a href="#" onclick="functionAverage(this)">AVERAGE</a>
+                  <a href="#" onclick="functionCount(this)">COUNT</a>
+                  <a href="#" onclick="functionMax(this)">MAX</a>
+                  <a href="#" onclick="functionMin(this)">MIN</a>
                 </div>
               </li>
               <li
