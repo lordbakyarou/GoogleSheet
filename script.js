@@ -35,7 +35,7 @@ function createGrid(e) {
 
   const sheet = document.createElement("div");
 
-  console.log(sheet.classList);
+  // console.log(sheet.classList);
   sheet.innerText = `Sheet${sheets.length}`;
   sheet.className = "sheet";
 
@@ -156,12 +156,15 @@ function sortDataByColumn(columnIndex) {
 
   // Update the DOM to reflect the sorted data
 
-  for (let j = 1; j < 100; j++) {
+  for (let j = 0; j < 99; j++) {
     const cellId = String.fromCharCode(64 + columnIndex + 1) + j;
     // console.log(cellId);
-    const cell = document.getElementById(cellId);
-    cell.innerText = d[j - 1] === undefined ? "" : d[j - 1];
+    const cell = data[parseInt(currentSheetIndex) - 1][j][columnIndex];
+
+    // console.log(cell, currentSheetIndex - 1, j, columnIndex);
+    cell.innerText = d[j] === undefined ? "" : d[j];
   }
+  // console.log(d);
 }
 
 function sortDataByColumnReverse(columnIndex) {
@@ -175,10 +178,13 @@ function sortDataByColumnReverse(columnIndex) {
 
   d.reverse();
 
-  for (let j = 1; j < 100; j++) {
+  for (let j = 0; j < 99; j++) {
     const cellId = String.fromCharCode(64 + columnIndex + 1) + j;
-    const cell = document.getElementById(cellId);
-    cell.innerText = d[j - 1] === undefined ? "" : d[j - 1];
+    // console.log(cellId);
+    const cell = data[parseInt(currentSheetIndex) - 1][j][columnIndex];
+
+    // console.log(cell, currentSheetIndex - 1, j, columnIndex);
+    cell.innerText = d[j] === undefined ? "" : d[j];
   }
 }
 
@@ -187,7 +193,7 @@ function sheetClicked(e) {
   e.target.classList.add("sheet-active");
   currentActiveSheet = "Sheet" + index;
   currentSheetIndex = index;
-  console.log(currentActiveSheet);
+  // console.log(currentActiveSheet);
 
   sheets[index - 1].style.display = "block";
 
@@ -199,14 +205,14 @@ function sheetClicked(e) {
 
     main.insertBefore(sheets[index - 1], footer);
   }
-  console.log(sheets[index - 1]);
+  // console.log(sheets[index - 1]);
 
   manageSheetState(currentActiveSheet);
 }
 
 function manageSheetState(index) {
   const sheetList = document.getElementsByClassName("sheet");
-  console.log(sheetList);
+  // console.log(sheetList);
 
   for (let i = 0; i < sheetList.length; i++) {
     if (sheetList[i].innerText != index) {
@@ -218,7 +224,7 @@ function manageSheetState(index) {
 let dropdownContent;
 
 function sortingFunction(e) {
-  console.log(popup);
+  // console.log(popup);
   e.target.appendChild(popup);
 }
 
@@ -238,7 +244,7 @@ function sortZtoA(e) {
   const columnName = e.parentNode.parentNode.parentNode;
   const index = columnName.id.charCodeAt(0) - 65;
 
-  console.log(index);
+  // console.log(index);
   sortDataByColumnReverse(index);
 }
 
@@ -252,7 +258,7 @@ searchInput.addEventListener("click", () => {
   for (let i = 0; i < data[parseInt(currentSheetIndex) - 1].length; i++) {
     for (let j = 0; j < data[parseInt(currentSheetIndex) - 1][0].length; j++) {
       if (data[parseInt(currentSheetIndex) - 1][i][j].innerText != "") {
-        searchData.push(data[parseInt(currentSheetIndex) - 1][i][j].innerText);
+        searchData.push(data[parseInt(currentSheetIndex) - 1][i][j]);
         searchIndex.push(data[parseInt(currentSheetIndex) - 1][i][j].id);
         // console.log(searchData);
       }
@@ -267,31 +273,31 @@ searchInput.addEventListener("click", () => {
       // console.log(data[i][j].innerText);
     }
   }
-  console.log(searchData, searchIndex);
+  // console.log(searchData, searchIndex);
 });
 
 searchInput.addEventListener("input", searchInCell);
 
 function searchInCell(e) {
   for (let i = 0; i < searchData.length; i++) {
-    const cell = document.getElementById(searchIndex[i]);
-    data[parseInt(currentSheetIndex) - 1];
+    // console.log(searchData[i]);
+    // console.log(data[parseInt(currentSheetIndex) - 1]);
     // console.log(searchIndex);
 
     if (
-      searchData[i].includes(searchInput.innerText) &&
+      searchData[i].innerText.includes(searchInput.innerText) &&
       searchInput.innerText != ""
     ) {
-      cell.style.backgroundColor = "#73d18f";
-      cell.style.border = "2px solid #146c2e";
-      console.log(searchData[i], cell);
+      searchData[i].style.backgroundColor = "#73d18f";
+      searchData[i].style.border = "2px solid #146c2e";
+      // console.log(searchData[i], searchData[i]);
     } else {
-      cell.style.backgroundColor = "white";
-      cell.style.border = "1px solid #e1e1e1";
-      cell.style.borderTopWidth = "0px";
-      cell.style.borderRightWidth = "0px";
+      searchData[i].style.backgroundColor = "white";
+      searchData[i].style.border = "1px solid #e1e1e1";
+      searchData[i].style.borderTopWidth = "0px";
+      searchData[i].style.borderRightWidth = "0px";
     }
 
-    console.log(searchInput.innerText);
+    // console.log(searchInput.innerText);
   }
 }
