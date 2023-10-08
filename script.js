@@ -1,11 +1,12 @@
-let currentActiveSheet = null;
+let currentActiveSheet = 1;
+let currentSheetIndex = 1;
 
 const main = document.getElementById("main");
 const footer = document.getElementById("footer");
 const searchInput = document.getElementById("searchInput");
 
 const sheets = [];
-let data;
+let data = [];
 let searchData;
 let searchIndex;
 
@@ -57,7 +58,7 @@ function createInsideGrid() {
   srNo.innerText = "";
   gridHeader.appendChild(srNo);
 
-  data = [];
+  const newData = [];
   // console.log(grid);
 
   for (let i = 65; i <= 90; i++) {
@@ -120,13 +121,16 @@ function createInsideGrid() {
       row.appendChild(cell);
     }
 
-    data.push(rowData);
+    newData.push(rowData);
+    // console.log(rowData, newData);
+
     grid.appendChild(row);
   }
 
   for (let i = 1; i < 100; i++) {
     createRow(i);
   }
+  data.push(newData);
 }
 
 addSheets.addEventListener("click", createGrid);
@@ -134,9 +138,13 @@ addSheets.addEventListener("click", createGrid);
 function sortDataByColumn(columnIndex) {
   const d = [];
   // console.log(data.length);
-  // console.log(data[0].length, data.length);
-  for (let i = 0; i < data.length; i++) {
-    const value = data[i][columnIndex].innerText;
+  // console.log(data[currentActiveSheet-1].length, data.length);
+  // console.log(data[parseInt(currentSheetIndex) - 1].length);
+  // console.log(parseInt(currentActiveSheet) - 1);
+
+  for (let i = 0; i < 99; i++) {
+    const value =
+      data[parseInt(currentSheetIndex) - 1][i][columnIndex].innerText;
     if (value != "") d.push(value);
     // console.log("");
     // console.log(data[i][columnIndex].innerText, data[i][columnIndex]);
@@ -159,8 +167,9 @@ function sortDataByColumn(columnIndex) {
 function sortDataByColumnReverse(columnIndex) {
   const d = [];
 
-  for (let i = 0; i < data.length; i++) {
-    const value = data[i][columnIndex].innerText;
+  for (let i = 0; i < 99; i++) {
+    const value =
+      data[parseInt(currentSheetIndex) - 1][i][columnIndex].innerText;
     if (value != "") d.push(value);
   }
 
@@ -177,6 +186,7 @@ function sheetClicked(e) {
   const index = e.target.innerText.replace("Sheet", "");
   e.target.classList.add("sheet-active");
   currentActiveSheet = "Sheet" + index;
+  currentSheetIndex = index;
   console.log(currentActiveSheet);
 
   sheets[index - 1].style.display = "block";
@@ -190,6 +200,7 @@ function sheetClicked(e) {
     main.insertBefore(sheets[index - 1], footer);
   }
   console.log(sheets[index - 1]);
+
   manageSheetState(currentActiveSheet);
 }
 
@@ -238,17 +249,20 @@ searchInput.addEventListener("click", () => {
   searchData = [];
   searchIndex = [];
 
-  for (let i = 0; i < data.length; i++) {
-    for (let j = 0; j < data[0].length; j++) {
-      if (data[i][j].innerText != "") {
-        searchData.push(data[i][j].innerText);
-        searchIndex.push(data[i][j].id);
+  for (let i = 0; i < data[parseInt(currentSheetIndex) - 1].length; i++) {
+    for (let j = 0; j < data[parseInt(currentSheetIndex) - 1][0].length; j++) {
+      if (data[parseInt(currentSheetIndex) - 1][i][j].innerText != "") {
+        searchData.push(data[parseInt(currentSheetIndex) - 1][i][j].innerText);
+        searchIndex.push(data[parseInt(currentSheetIndex) - 1][i][j].id);
         // console.log(searchData);
       }
-      data[i][j].style.backgroundColor = "white";
-      data[i][j].style.border = "1px solid #e1e1e1";
-      data[i][j].style.borderTopWidth = "0px";
-      data[i][j].style.borderRightWidth = "0px";
+      data[parseInt(currentSheetIndex) - 1][i][j].style.backgroundColor =
+        "white";
+      data[parseInt(currentSheetIndex) - 1][i][j].style.border =
+        "1px solid #e1e1e1";
+      data[parseInt(currentSheetIndex) - 1][i][j].style.borderTopWidth = "0px";
+      data[parseInt(currentSheetIndex) - 1][i][j].style.borderRightWidth =
+        "0px";
 
       // console.log(data[i][j].innerText);
     }
@@ -261,6 +275,7 @@ searchInput.addEventListener("input", searchInCell);
 function searchInCell(e) {
   for (let i = 0; i < searchData.length; i++) {
     const cell = document.getElementById(searchIndex[i]);
+    data[parseInt(currentSheetIndex) - 1];
     // console.log(searchIndex);
 
     if (
