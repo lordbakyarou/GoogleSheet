@@ -154,14 +154,27 @@ function sortDataByColumn(columnIndex) {
 
   // console.log(d);
 
+  // const he = data[parseInt(currentSheetIndex) - 1];
+  // data[parseInt(currentSheetIndex) - 1].sort(function (a, b) {
+  //   const value1 =
+  //     a[columnIndex].innerText === "" ? Infinity : a[columnIndex].innerText;
+  //   const value2 =
+  //     b[columnIndex].innerText === "" ? Infinity : b[columnIndex].innerText;
+
+  //   return value1 - value2;
+  // });
+  // console.log(data);
+
   // Update the DOM to reflect the sorted data
+  //sorting yet to be fixed
 
   for (let j = 0; j < 99; j++) {
-    const cellId = String.fromCharCode(64 + columnIndex + 1) + j;
+    const cellId = String.fromCharCode(65 + j) + j;
     // console.log(cellId);
     const cell = data[parseInt(currentSheetIndex) - 1][j][columnIndex];
 
-    // console.log(cell, currentSheetIndex - 1, j, columnIndex);
+    cell.id = cellId;
+
     cell.innerText = d[j] === undefined ? "" : d[j];
   }
   // console.log(d);
