@@ -125,10 +125,6 @@
   background-color: white;
 }
 
-#function-dropdown {
-  display: flex;
-}
-
 #function-dropdown > a :hover {
   background-color: red;
 }
